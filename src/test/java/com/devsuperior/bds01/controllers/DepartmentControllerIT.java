@@ -18,19 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DepartmentControllerIT {
 
-	@Autowired
-	private MockMvc mockMvc;
-	
-	@Test
-	public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
-		
-		ResultActions result =
-				mockMvc.perform(get("/departments")
-					.contentType(MediaType.APPLICATION_JSON));
+  @Autowired
+  private MockMvc mockMvc;
 
-		result.andExpect(status().isOk());
-		result.andExpect(jsonPath("$[0].name").value("Management"));
-		result.andExpect(jsonPath("$[1].name").value("Sales"));
-		result.andExpect(jsonPath("$[2].name").value("Training"));
-	}
+  @Test
+  public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
+    ResultActions result = mockMvc.perform(
+      get("/departments").contentType(MediaType.APPLICATION_JSON)
+    );
+
+    result.andExpect(status().isOk());
+    result.andExpect(jsonPath("$[0].name").value("Management"));
+    result.andExpect(jsonPath("$[1].name").value("Sales"));
+    result.andExpect(jsonPath("$[2].name").value("Training"));
+  }
 }
